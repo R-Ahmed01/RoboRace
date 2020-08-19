@@ -5,27 +5,19 @@ public class Game {
 	private TUI Tui;
 	
 	public void startGame() {
-		init(); //initialisation of images, sound..etc. will be executed once only
 
-	    int fps = 60 //number of update per second.
-	    double tickPerSecond = 1000000000/fps;
-	    double delta = 0;
-	    long now;
-	    long lastTime = System.nanoTime();
 
-	    while(running){
+	    	/**
+	    	 * A Loop that checks Player 1 enters 5 actions, then 2 and so on
+	    	 * When last player has entered actions, Robot 1 does first action, then robot 2
+	    	 * does first action until last robot has completed first action. When first round 
+	    	 * of actions are done, board activates and then based on grid locations act().Then 
+	    	 * robots do second action but starts with player 2.
+	    	 * 
+	    	 * ** This is Turn Based **
+	    	 */
 
-	        now = System.nanoTime();
-	        delta += (now - lastTime)/tickPerSecond;
-	        lastTime = now;
-
-	        if(delta >= 1){
-
-	            tick();
-	            render();
-	            delta--;
-	        }
-	    }
+	       
 	}
 	private void init() {
 		
