@@ -1,0 +1,26 @@
+package GridLocations;
+
+import java.util.Queue;
+
+public class Robot implements IGridEntity{
+
+	private Queue<Character> actions; 
+	
+	public Robot (Queue<Character> actions) {
+		this.actions = actions;
+	}
+	
+	@Override
+	public void act() {
+		// TODO Auto-generated method stub
+		/**
+		 * Represented as A, B, C, D
+		 * If robot location is another robot then 
+		 * moving robot pushes other robot in direction its going
+		 */
+		
+		
+		
+	}
+
+}
