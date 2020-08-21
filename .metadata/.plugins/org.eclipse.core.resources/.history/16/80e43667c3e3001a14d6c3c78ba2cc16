@@ -1,0 +1,53 @@
+package GridLocations;
+
+import java.util.*;
+
+public class Robot implements IGridEntity{
+
+	private LinkedList<Character> actions; 
+	private int x;
+	private int y;
+	
+	public Robot (LinkedList<Character> actions) {
+		this.actions = actions;
+	}
+	
+	
+	
+	@Override
+	public void act() {
+		// TODO Auto-generated method stub
+		/**
+		 * Represented as A, B, C, D
+		 * If robot location is another robot then 
+		 * moving robot pushes other robot in direction its going
+		 */
+		
+		if(actions.size() < 1) {
+			return;
+		}
+		
+		var action = actions.remove();
+		switch (action) {
+		case 'F':
+			//Code moves forward
+			break;
+		case 'B':
+			//Code back up
+			break;
+		case 'L':
+			//Code rotate left
+			break;
+		case 'R':
+			//Code rotate right
+			break;
+		case 'U':
+			//Code U turn
+			break;
+		case 'W':
+			//Code Wait
+			break;
+		}
+	}
+
+}
