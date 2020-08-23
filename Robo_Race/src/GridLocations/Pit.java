@@ -11,5 +11,9 @@ public class Pit implements IGridEntity{
 		 * robot is destroyed and returned to start
 		 */
 	}
+	
+	public String toString() {
+		return "X";
+	}
 
 }

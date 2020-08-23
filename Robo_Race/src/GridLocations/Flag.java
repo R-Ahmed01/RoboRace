@@ -12,4 +12,13 @@ public class Flag implements IGridEntity{
 		 * Update robot on next flag required
 		 */
 	}
+	
+	int number;
+	public Flag(int flagNumber) {
+		number = flagNumber;
+	}
+	
+	public String toString() {
+		return Integer.toString(number);
+	}
 }

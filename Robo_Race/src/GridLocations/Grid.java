@@ -23,7 +23,7 @@ public class Grid {
 		ArrayList<String> grid = readLines(file);
 		height = grid.size();
 		 board = new char[height][width];
-		 entities = new EmptyTile[height][width];
+		 entities = new IGridEntity[height][width];
 		
 		 /**
 		  * So create a Switch Statement depending on what the character is
@@ -40,7 +40,8 @@ public class Grid {
 			}
 			lineCounter++;
 		}
-		//System.out.println(Arrays.deepToString(board).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+		showBoard();
+		
 	}
 	
 	private ArrayList<String> readLines(File file) throws FileNotFoundException, IOException{
@@ -77,11 +78,17 @@ public class Grid {
 		//IGridentity need to have a print character - property of char
 		
 		
-		System.out.println(Arrays.deepToString(board).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
-	System.out.println("\n");
-	System.out.println("\n");
+		showBoard();
+	}
 	
-	System.out.println("\n");
-
+	public void showBoard() {
+		StringBuilder boardString = new StringBuilder();
+		for(int i=0; i<entities.length; i++) {
+			for(int j=0; j<entities[i].length; j++) {
+				boardString.append("[" + entities[i][j].toString() + "]");
+			}
+			boardString.append("\n");
+		}
+		System.out.println(boardString);
 	}
 }

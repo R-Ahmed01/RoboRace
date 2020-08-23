@@ -11,5 +11,9 @@ public class EmptyTile implements IGridEntity{
 		 */
 		
 	}
+	
+	public String toString() {
+		return ".";
+	}
 
 }

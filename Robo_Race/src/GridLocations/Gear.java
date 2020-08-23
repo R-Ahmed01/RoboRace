@@ -1,6 +1,6 @@
 package GridLocations;
 
-public class GearCCW implements IGridEntity {
+public class Gear implements IGridEntity {
 
 	@Override
 	public void act() {
@@ -11,5 +11,13 @@ public class GearCCW implements IGridEntity {
 		 * Robot is directed counterclockwise/clockwise
 		 */
 	}
-
+	
+	String gear;
+	public Gear(String gearType) {
+		gear = gearType;
+	}
+	
+	public String toString() {
+		return gear;
+	}
 }

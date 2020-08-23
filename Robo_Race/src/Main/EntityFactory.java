@@ -8,28 +8,21 @@ public class EntityFactory {
 		case 'X' :
 			return new Pit();
 		case '+' :
-			return new GearCW();
+			return new Gear("+");
 		case '-' :
-			return new GearCCW();
+			return new Gear("-");
 		case '1':
-			return new Flag();
 		case '2':
-			return new Flag();
 		case '3':
-			return new Flag();
 		case '4':
-			return new Flag();
+			return new Flag(Character.getNumericValue(symbol));
 		case 'A':
-			return new Robot(null);
 		case 'B':
-			return new Robot(null);
 		case 'C':
-			return new Robot(null);
 		case 'D':
-			return new Robot(null);
+			return new Robot(symbol);
 		case '.':
-			break;
-			//Add all of the Symbols
+			return new EmptyTile();
 		}
 		return null;
 	}
