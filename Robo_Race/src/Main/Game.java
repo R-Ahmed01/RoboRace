@@ -21,10 +21,11 @@ public class Game {
 		var moves = new LinkedList<Character>(); 
 		
 		moves.add('F');
-		moves.add('U');
-		moves.add('F');
+		moves.add('B');
 		moves.add('L');
 		moves.add('R');
+		moves.add('U');
+		moves.add('W');
 		
 		robots.add(new Robot(moves));
 
