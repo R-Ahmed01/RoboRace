@@ -12,6 +12,7 @@ public class Game {
 	private TUI Tui;
 	private Grid grid;
 	private LinkedList<Robot> robots;
+	
 	public void startGame(File file) {
 		
 		// Here is where we would read commands from file
@@ -65,6 +66,7 @@ public class Game {
 		            render();
 		            delta--;
 		        }
+		        running = false;
 		    }
 
 	       
@@ -75,8 +77,8 @@ public class Game {
 		
 	}
 	private void render() {
-		grid.render();
-		Tui.Render();
+		//grid.render();
+		//Tui.Render();
 		
 	}
 	private void tick() {
