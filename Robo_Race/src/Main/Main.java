@@ -10,5 +10,11 @@ public class Main {
 		
 		Game game = new Game();
 		game.startGame(file);
+		
+		TUI tui = new TUI();
+		String moves = tui.promptMoves();
+		while (!tui.areMovesValid(moves)) {
+			moves = tui.promptMoves();
+		}
 	}
 }

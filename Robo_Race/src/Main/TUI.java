@@ -1,6 +1,5 @@
 package Main;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -45,14 +44,6 @@ public class TUI {
 		    lastMovement = move;
 		}
 		return true;
-	}
-	
-	public static void main(String[] args) {
-		TUI tui = new TUI();
-		String moves = tui.promptMoves();
-		while (!tui.areMovesValid(moves)) {
-			moves = tui.promptMoves();
-		}
 	}
 }
 
