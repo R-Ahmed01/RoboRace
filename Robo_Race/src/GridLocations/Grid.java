@@ -84,15 +84,4 @@ public class Grid {
 	System.out.println("\n");
 
 	}
-	/**
-	 * Made up of grid entities that make up the board
-	 * Could be a 2D Array of Grid Entities?
-	 */
-	private Grid(int x, int y) {
-		
-	}
-	
-	
-	
-	
 }

@@ -1,6 +1,6 @@
 package GridLocations;
 
-public class Gear implements IGridEntity {
+public class GearCCW implements IGridEntity {
 
 	@Override
 	public void act() {

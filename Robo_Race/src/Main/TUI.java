@@ -28,6 +28,7 @@ public class TUI {
 		int numberOfMoves = input.length();
 		
 		if (numberOfMoves != 5) {
+			System.err.println("Must enter 5 moves, no more or less.");
 			return false;
 		}
 		
