@@ -9,13 +9,17 @@ public class Robot implements IGridEntity{
 	private int y;
 	private Character direction;
 	
-	public Robot (LinkedList<Character> actions) {
-		this.actions = actions;
+	public char robot;
+	public Robot (char player) {
+		robot = player;
 		direction = 'N';
+		actions = new LinkedList<Character>();
 	}
 	
-	
-	
+	public String toString() {
+		return Character.toString(robot);
+	}
+
 	@Override
 	public void act() {
 		// TODO Auto-generated method stub
@@ -24,6 +28,18 @@ public class Robot implements IGridEntity{
 		 * If robot location is another robot then 
 		 * moving robot pushes other robot in direction its going
 		 */
+		
+	}
+	
+	public void storedActions(LinkedList<Character> actions) {
+		this.actions = actions;
+	}
+	
+	public boolean hasActions() {
+		return actions.size()>0;
+	}
+	
+	public void turn(){
 		
 		if(actions.size() < 1) {
 			return;
@@ -135,5 +151,4 @@ public class Robot implements IGridEntity{
 			break;
 		}
 	}
-
 }
