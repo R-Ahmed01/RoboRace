@@ -1,5 +1,4 @@
 package Main;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,16 +6,29 @@ import java.util.Scanner;
 
 import GridLocations.Grid;
 import GridLocations.Robot;
-
+/**
+ * The TUI Class
+ * 
+ * @author Team 13: Daniel, Hayley, Rifath
+ * 
+ * Responsible for the Text User Interface.
+ */
 public class TUI {
 
 	private List<Character> allowedMoves;
 	
+	/**
+	 * The TUI Constructor
+	 */
 	public TUI() {
 		Character[] allowedMovements = { 'F', 'B', 'L', 'R', 'U', 'W' };
 		this.allowedMoves = Arrays.asList(allowedMovements);
 	}
 	
+	/**
+	 * Prompts the player to enter moves
+	 * @return String
+	 */
 	public String promptMoves() {
 		Scanner sc = new Scanner(System.in);
         System.out.println("Enter player moves:");
@@ -26,6 +38,11 @@ public class TUI {
         return "";
 	}
 	
+	/**
+	 * Checks entered moves are valid
+	 * @param input
+	 * @return boolean
+	 */
 	public boolean areMovesValid(String input) {
 		char[] movements = input.toCharArray();
 		char lastMovement = ' ';
@@ -51,7 +68,11 @@ public class TUI {
 		return true;
 	}
 	
-	
+	/**
+	 * Displays the board entities
+	 * @param grid
+	 * @param robots
+	 */
 	public void showBoard(Grid grid, LinkedList<Robot>robots) {
 		StringBuilder boardString = new StringBuilder();
 		for(int i=0; i<grid.entities.length; i++) {
