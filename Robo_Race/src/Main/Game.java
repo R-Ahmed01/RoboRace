@@ -2,6 +2,7 @@ package Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import GridLocations.EmptyTile;
 import GridLocations.Grid;
@@ -57,19 +58,17 @@ public class Game {
 		init();//initialise once
 		render();
 	    int fps = 1;//updates per second
-	    double tickPerSecond = 60/fps;
 	    double delta = 0;
 	    long now;
 	    long lastTime = System.nanoTime();
 	    running = true;
 	    while(running){
 	        now = System.nanoTime();
-	        delta += (now - lastTime)/tickPerSecond;
+	        delta += (now - lastTime)*fps;
 	        lastTime = now;
-	        if(delta >= 1){
+	        if(delta >= 1e9){
 	            tick();
-	            render();
-	            delta--;
+	            delta=0;
 	        }
 	    }    
 	}
@@ -119,9 +118,15 @@ public class Game {
 		for(int i = 0; i < robots.size(); i++) {
 			var robot = robots.remove();
 			robot.turn(robots);
-			robots.add(robot);			
+			robots.add(robot);	
+			render();
+			try {
+				TimeUnit.MILLISECONDS.sleep(250);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		render();
 		robots.add(robots.remove());
 		for(int i = 0; i < grid.entities.length; i++) {
 			for(int j = 0; j < grid.entities[i].length; j++) {
