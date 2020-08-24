@@ -8,9 +8,8 @@ public class EntityFactory {
 		case 'X' :
 			return new Pit();
 		case '+' :
-			return new Gear("+");
 		case '-' :
-			return new Gear("-");
+			return new Gear(symbol);
 		case '1':
 		case '2':
 		case '3':
@@ -21,6 +20,11 @@ public class EntityFactory {
 		case 'C':
 		case 'D':
 			return new Robot(symbol);
+		case '^':
+		case '>':
+		case '<':
+		case 'v':
+			return new Conveyor(symbol);
 		case '.':
 			return new EmptyTile();
 		}

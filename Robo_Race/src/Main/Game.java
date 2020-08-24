@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import GridLocations.EmptyTile;
 import GridLocations.Grid;
 import GridLocations.Robot;
 
@@ -12,21 +13,12 @@ public class Game {
 	private TUI tui;
 	private Grid grid;
 	private LinkedList<Robot> robots;
-	
+	private boolean running;
 	public void startGame(File file) {
 		
 		// Here is where we would read commands from file
 		
 		robots = new LinkedList<Robot>();
-		var moves = new LinkedList<Character>(); 
-		
-		moves.add('F');
-		moves.add('B');
-		moves.add('L');
-		moves.add('R');
-		moves.add('U');
-		moves.add('W');
-		
 		try {
 			grid = new Grid(file);
 		} catch (IOException e) {
@@ -36,21 +28,30 @@ public class Game {
 		for(int i = 0; i < grid.entities.length; i++) {
 			for(int j = 0; j < grid.entities[i].length; j++) {
 				var entity = grid.entities[i][j];
-				if(entity instanceof Robot) {
-					robots.add((Robot) entity);
+				if(entity instanceof Robot) {//found robots in list of entities
+					Robot robot = (Robot)entity; //casting entity to a robot
+					robots.add(robot);//add robots to list of robots
+					robot.startingX = j;//set starting positions that remain
+					robot.startingY = i;
+					robot.x = j;//set starting positions that chnage
+					robot.y = i;
+					grid.entities[i][j] = new EmptyTile();//replace robots with empty tile in list of entities
+					//robot is no longer in list of entities but is in list of robots seperate
+					//robots are seperate and have coordinates
+					
 				}
 			}
 		}
 		Collections.sort(robots, new RobotSorter());
 		
 		 init(); //initialisation of images, sound..etc. will be executed once only
-
+		 render();
 		    int fps = 1; //number of update per second.
 		    double tickPerSecond = 60/fps;
 		    double delta = 0;
 		    long now;
 		    long lastTime = System.nanoTime();
-		    boolean running = true;
+		    running = true;
 
 		    while(running){
 
@@ -64,10 +65,7 @@ public class Game {
 		            render();
 		            delta--;
 		        }
-		        running = false;
-		    }
-
-	       
+		    }    
 	}
 	
 	private void init() {
@@ -77,9 +75,7 @@ public class Game {
 	}
 	
 	private void render() {
-		//grid.render();
-		//Tui.Render();
-		
+		tui.showBoard(grid, robots);
 	}
 	
 	private void promptForPlayerMoves() {
@@ -104,17 +100,23 @@ public class Game {
 		for(int i = 0; i < robots.size(); i++) {
 			var robot = robots.remove();
 			
-			robot.turn();
+			robot.turn();//take the list of robots and decide if bumping and push
 			
 			// Do the act method to see what the next move is
 			
 			robots.add(robot);			
 		}
+		render();
 		robots.add(robots.remove());
 		for(int i = 0; i < grid.entities.length; i++) {
 			for(int j = 0; j < grid.entities[i].length; j++) {
-				var entity = grid.entities[i][j];
-				entity.act();
+				var entity = grid.entities[i][j];//entity at position
+				var robot = grid.robotAtPosition(robots, j, i);//robot at position
+				entity.act(robot);//If entity is a robot dont act
+				if(robot != null && robot.flag == 4) {
+					running = false;
+					System.out.println("Player " + robot.robot + " has won!");
+				}
 			}
 		}
 		
