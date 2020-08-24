@@ -11,6 +11,7 @@ public class Robot implements IGridEntity{
 	public int startingX;
 	public int startingY;
 	public char robot;
+	
 	public Robot (char player) {
 		robot = player;
 		direction = 'N';
@@ -99,7 +100,9 @@ public class Robot implements IGridEntity{
 		case 'W':
 				x--;
 			break;
-		}//if x is greater than width or y id greater than height or either less than 0, return to start 
+		}
+		//if x is greater than width or y id greater than height or either less than 0, return to start 
+		//if(x>)
 	}
 	
 	public void moveBackwards() {

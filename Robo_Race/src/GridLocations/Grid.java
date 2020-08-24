@@ -15,29 +15,18 @@ import Main.EntityFactory;
 
 public class Grid {
 
-	private int height;
-	private int width;
+	public int height;
+	public int width;
 	public IGridEntity[][] entities;
-	private char[][] board;
 	
 	public Grid (File file) throws FileNotFoundException, IOException {
 		ArrayList<String> grid = readLines(file);
 		height = grid.size();
-		 board = new char[height][width];
-		 entities = new IGridEntity[height][width];
-		
-		 /**
-		  * So create a Switch Statement depending on what the character is
-		  */
-		 
+		entities = new IGridEntity[height][width];
 		int lineCounter = 0;
 		for(String line : grid) {
 			for(int i = 0; i < line.length(); i++) {
-				board[lineCounter][i] = line.charAt(i); // switch on the character 
-				
 				entities[lineCounter][i] = EntityFactory.createEntity(line.charAt(i));
-				
-				
 			}
 			lineCounter++;
 		}	
@@ -63,7 +52,6 @@ public class Grid {
 		    	
 		    	if(!line.toLowerCase().contains("format")) {
 		    		Lines.add(line);
-		    		//height++;
 		    		width = line.length();
 		    	}
 		   	}
