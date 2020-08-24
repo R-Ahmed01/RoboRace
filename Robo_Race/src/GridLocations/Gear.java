@@ -11,5 +11,13 @@ public class Gear implements IGridEntity {
 		 * Robot is directed counterclockwise/clockwise
 		 */
 	}
-
+	
+	String gear;
+	public Gear(String gearType) {
+		gear = gearType;
+	}
+	
+	public String toString() {
+		return gear;
+	}
 }

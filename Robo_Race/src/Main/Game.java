@@ -9,9 +9,10 @@ import GridLocations.Robot;
 
 public class Game {
 	
-	private TUI Tui;
+	private TUI tui;
 	private Grid grid;
 	private LinkedList<Robot> robots;
+	
 	public void startGame(File file) {
 		
 		// Here is where we would read commands from file
@@ -20,29 +21,27 @@ public class Game {
 		var moves = new LinkedList<Character>(); 
 		
 		moves.add('F');
-		moves.add('U');
-		moves.add('F');
+		moves.add('B');
 		moves.add('L');
 		moves.add('R');
+		moves.add('U');
+		moves.add('W');
 		
-		robots.add(new Robot(moves));
-
 		try {
 			grid = new Grid(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	    	/**
-	    	 * A Loop that checks Player 1 enters 5 actions, then 2 and so on
-	    	 * When last player has entered actions, Robot 1 does first action, then robot 2
-	    	 * does first action until last robot has completed first action. When first round 
-	    	 * of actions are done, board activates and then based on grid locations act().Then 
-	    	 * robots do second action but starts with player 2.
-	    	 * 
-	    	 * ** This is Turn Based **
-	    	 */
+		for(int i = 0; i < grid.entities.length; i++) {
+			for(int j = 0; j < grid.entities[i].length; j++) {
+				var entity = grid.entities[i][j];
+				if(entity instanceof Robot) {
+					robots.add((Robot) entity);
+				}
+			}
+		}
+		Collections.sort(robots, new RobotSorter());
 		
 		 init(); //initialisation of images, sound..etc. will be executed once only
 
@@ -65,42 +64,59 @@ public class Game {
 		            render();
 		            delta--;
 		        }
+		        running = false;
 		    }
 
 	       
 	}
+	
 	private void init() {
 		
-		Tui = new TUI();
+		tui = new TUI();
 		
 	}
+	
 	private void render() {
-		grid.render();
-		Tui.Render();
+		//grid.render();
+		//Tui.Render();
 		
 	}
+	
+	private void promptForPlayerMoves() {
+		for(int i = 0; i < robots.size(); i++) {
+			System.out.println("Player " + robots.get(i));
+			String moves = tui.promptMoves();
+			while (!tui.areMovesValid(moves)) {
+				moves = tui.promptMoves();
+			}	
+			LinkedList<Character> movesList = new LinkedList<Character>();
+			for(char c:moves.toCharArray()) {
+				movesList.add(c);
+			}
+			robots.get(i).storedActions(movesList);
+		}
+	}
+	
 	private void tick() {
-		
-		
+		if(!robots.getFirst().hasActions()) {
+			promptForPlayerMoves();
+		}
 		for(int i = 0; i < robots.size(); i++) {
 			var robot = robots.remove();
 			
-			robot.act();
+			robot.turn();
 			
 			// Do the act method to see what the next move is
 			
-			robots.add(robot);
-			
+			robots.add(robot);			
 		}
-		
 		robots.add(robots.remove());
-		// loop through row then column
-		
-		//for(int i = 0; i < grid.entities.size(); i++) {
-			//var entity = grid.entities[i];
-			
-			//entity.act();
-		//}
+		for(int i = 0; i < grid.entities.length; i++) {
+			for(int j = 0; j < grid.entities[i].length; j++) {
+				var entity = grid.entities[i][j];
+				entity.act();
+			}
+		}
 		
 		/**
 		 * Whose turn is it

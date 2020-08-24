@@ -7,8 +7,22 @@ public class EntityFactory {
 		switch (symbol) {
 		case 'X' :
 			return new Pit();
-			
-			//Add all of the Symbols
+		case '+' :
+			return new Gear("+");
+		case '-' :
+			return new Gear("-");
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+			return new Flag(Character.getNumericValue(symbol));
+		case 'A':
+		case 'B':
+		case 'C':
+		case 'D':
+			return new Robot(symbol);
+		case '.':
+			return new EmptyTile();
 		}
 		return null;
 	}

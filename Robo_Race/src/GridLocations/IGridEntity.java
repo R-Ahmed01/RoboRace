@@ -12,4 +12,5 @@ public interface IGridEntity {
 	
 	public void act();
 	//All Grid Locations should act if landed on by robot
+	
 }
