@@ -1,5 +1,4 @@
 package GridLocations;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,13 +11,25 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import Main.EntityFactory;
-
+/**
+ * The Grid Class
+ * 
+ * @author Team 13: Daniel, Hayley, Rifath
+ * 
+ * Handles the Grid Entities read from the board file
+ */
 public class Grid {
 
 	public static int height;
 	public static int width;
 	public IGridEntity[][] entities;
 	
+	/**
+	 * The Grid Constructor
+	 * @param file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public Grid (File file) throws FileNotFoundException, IOException {
 		ArrayList<String> grid = readLines(file);
 		height = grid.size();
@@ -32,6 +43,13 @@ public class Grid {
 		}	
 	}
 	
+	/**
+	 * Robot Position on the board
+	 * @param robots
+	 * @param x
+	 * @param y
+	 * @return Robot
+	 */
 	public Robot robotAtPosition(LinkedList<Robot>robots, int x, int y) {
 		for(int i=0;i<robots.size(); i++) {
 			Robot robot = robots.get(i);
@@ -42,6 +60,13 @@ public class Grid {
 		return null;
 	}
 	
+	/**
+	 * Reads the file line by line
+	 * @param file
+	 * @return ArrayList<String>
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	private ArrayList<String> readLines(File file) throws FileNotFoundException, IOException{
 		ArrayList<String> Lines = new ArrayList<String>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
