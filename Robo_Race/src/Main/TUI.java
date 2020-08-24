@@ -1,8 +1,12 @@
 package Main;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import GridLocations.Grid;
+import GridLocations.Robot;
 
 public class TUI {
 
@@ -45,6 +49,24 @@ public class TUI {
 		    lastMovement = move;
 		}
 		return true;
+	}
+	
+	
+	public void showBoard(Grid grid, LinkedList<Robot>robots) {
+		StringBuilder boardString = new StringBuilder();
+		for(int i=0; i<grid.entities.length; i++) {
+			for(int j=0; j<grid.entities[i].length; j++) {
+				Robot robot = grid.robotAtPosition(robots, j, i);
+				if(robot == null) {
+					boardString.append("[" + grid.entities[i][j].toString() + "]");
+				}
+				else {
+					boardString.append("[" + robot.toString() + "]");
+				}
+			}
+			boardString.append("\n");
+		}
+		System.out.println(boardString);
 	}
 }
 

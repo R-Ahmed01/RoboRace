@@ -1,6 +1,6 @@
 package GridLocations;
 
-public class Gear implements IGridEntity {
+public class Conveyor implements IGridEntity {
 
 	@Override
 	public void act(Robot robot) {
@@ -13,22 +13,28 @@ public class Gear implements IGridEntity {
 		if(robot == null) {//if there isnt a robot at this position do nothing
 			return;
 		}
-		switch(gear) {
-		case '+':
-			robot.rotateRight();
+		switch(direction) {
+		case '^':
+			robot.y--;
 			break;
-		case '-':
-			robot.rotateLeft();
+		case '>':
+			robot.x++;
+			break;
+		case '<':
+			robot.x--;
+			break;
+		case 'v':
+			robot.y++;
 			break;
 		}
 	}
 	
-	char gear;
-	public Gear(char gearType) {
-		gear = gearType;
+	char direction;
+	public Conveyor(char direction) {
+		this.direction = direction;
 	}
 	
 	public String toString() {
-		return Character.toString(gear);
+		return Character.toString(direction);
 	}
 }
