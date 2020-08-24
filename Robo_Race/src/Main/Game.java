@@ -100,7 +100,7 @@ public class Game {
 		for(int i = 0; i < robots.size(); i++) {
 			var robot = robots.remove();
 			
-			robot.turn();//take the list of robots and decide if bumping and push
+			robot.turn(robots);//take the list of robots and decide if bumping and push
 			
 			// Do the act method to see what the next move is
 			

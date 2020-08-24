@@ -15,8 +15,8 @@ import Main.EntityFactory;
 
 public class Grid {
 
-	private int height;
-	private int width;
+	public static int height;
+    public static int width;
 	public IGridEntity[][] entities;
 	private char[][] board;
 	

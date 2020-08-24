@@ -57,7 +57,8 @@ public class Robot implements IGridEntity{
 		return actions.size()>0;
 	}
 	
-	public void turn(){
+	
+	public void turn(LinkedList<Robot> robots){
 		
 		if(actions.size() < 1) {
 			return;
@@ -83,7 +84,31 @@ public class Robot implements IGridEntity{
 			case 'W':
 				break;
 		}
+		checkOffGrid(robots);
+		//Checks if another robot is in its place and need to move it
+        for(int i = 0; i < robots.size(); i++) {
+
+            var otherRobot = robots.get(i);
+
+            if (otherRobot == this) {
+                continue;
+            }
+
+            if(x == otherRobot.x && y == otherRobot.y) {
+                // push other robot 
+                // create switch statement to do the pushing
+                otherRobot.checkOffGrid(robots);
+
+            }
+        }
 	}
+	
+	public void checkOffGrid(LinkedList<Robot> robots) {
+        if (x > Grid.width || y > Grid.height || x < 0 || y < 0) {
+            x = startingX; //Check if another robot is there
+            y = startingY;
+        }
+    }
 	
 	public void moveForward() {
 		switch(direction) {
