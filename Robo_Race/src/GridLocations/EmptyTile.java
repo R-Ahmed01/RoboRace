@@ -3,7 +3,7 @@ package GridLocations;
 public class EmptyTile implements IGridEntity{
 
 	@Override
-	public void act() {
+	public void act(Robot robot) {
 		// TODO Auto-generated method stub
 		/**
 		 * Represented as (.)
@@ -15,5 +15,4 @@ public class EmptyTile implements IGridEntity{
 	public String toString() {
 		return ".";
 	}
-
 }

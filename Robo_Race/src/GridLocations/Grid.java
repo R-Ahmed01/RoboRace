@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 import Main.EntityFactory;
 
@@ -39,9 +40,17 @@ public class Grid {
 				
 			}
 			lineCounter++;
+		}	
+	}
+	
+	public Robot robotAtPosition(LinkedList<Robot>robots, int x, int y) {
+		for(int i=0;i<robots.size(); i++) {
+			Robot robot = robots.get(i);
+			if(robot.x == x && robot.y == y) {
+				return robot;
+			}
 		}
-		showBoard();
-		
+		return null;
 	}
 	
 	private ArrayList<String> readLines(File file) throws FileNotFoundException, IOException{
@@ -60,35 +69,5 @@ public class Grid {
 		   	}
 		  }
 		return Lines;
-	}
-	
-	
-	public void render(int x, int y, IGridEntity tileType) {
-		
-		/**
-		 * Location becomes part of render
-		 * loops throough 2D array of I grid entities
-		 * calls print method for each
-		 * Add print method to IGrid
-		 * or return and build upon string
-		 */
-		
-		// loop through entities
-		// and get there print characters printed out
-		//IGridentity need to have a print character - property of char
-		
-		
-		showBoard();
-	}
-	
-	public void showBoard() {
-		StringBuilder boardString = new StringBuilder();
-		for(int i=0; i<entities.length; i++) {
-			for(int j=0; j<entities[i].length; j++) {
-				boardString.append("[" + entities[i][j].toString() + "]");
-			}
-			boardString.append("\n");
-		}
-		System.out.println(boardString);
 	}
 }
