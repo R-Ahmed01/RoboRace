@@ -11,7 +11,7 @@ import GridLocations.Robot;
  * 
  * @author Team 13: Daniel, Hayley, Rifath
  * 
- * Handles the Text User Interface
+ * Handles the start and running of the game
  */
 public class Game {
 	
