@@ -14,15 +14,12 @@ public class Game {
 	private Grid grid;
 	private LinkedList<Robot> robots;
 	private boolean running;
+	
 	public void startGame(File file) {
-		
-		// Here is where we would read commands from file
-		
 		robots = new LinkedList<Robot>();
 		try {
 			grid = new Grid(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for(int i = 0; i < grid.entities.length; i++) {
@@ -37,30 +34,25 @@ public class Game {
 					robot.y = i;
 					grid.entities[i][j] = new EmptyTile();//replace robots with empty tile in list of entities
 					//robot is no longer in list of entities but is in list of robots seperate
-					//robots are seperate and have coordinates
-					
+					//robots are seperate and have coordinates	
 				}
 			}
 		}
 		Collections.sort(robots, new RobotSorter());
 		
-		 init(); //initialisation of images, sound..etc. will be executed once only
+		 init();
 		 render();
-		    int fps = 1; //number of update per second.
+		    int fps = 1;
 		    double tickPerSecond = 60/fps;
 		    double delta = 0;
 		    long now;
 		    long lastTime = System.nanoTime();
 		    running = true;
-
 		    while(running){
-
 		        now = System.nanoTime();
 		        delta += (now - lastTime)/tickPerSecond;
 		        lastTime = now;
-
 		        if(delta >= 1){
-
 		            tick();
 		            render();
 		            delta--;
@@ -69,9 +61,7 @@ public class Game {
 	}
 	
 	private void init() {
-		
 		tui = new TUI();
-		
 	}
 	
 	private void render() {
@@ -99,58 +89,21 @@ public class Game {
 		}
 		for(int i = 0; i < robots.size(); i++) {
 			var robot = robots.remove();
-			
-			robot.turn(robots);//take the list of robots and decide if bumping and push
-			
-			// Do the act method to see what the next move is
-			
+			robot.turn(robots);
 			robots.add(robot);			
 		}
 		render();
 		robots.add(robots.remove());
 		for(int i = 0; i < grid.entities.length; i++) {
 			for(int j = 0; j < grid.entities[i].length; j++) {
-				var entity = grid.entities[i][j];//entity at position
-				var robot = grid.robotAtPosition(robots, j, i);//robot at position
-				entity.act(robot);//If entity is a robot dont act
+				var entity = grid.entities[i][j];
+				var robot = grid.robotAtPosition(robots, j, i);
+				entity.act(robot);
 				if(robot != null && robot.flag == 4) {
 					running = false;
 					System.out.println("Player " + robot.robot + " has won!");
 				}
 			}
 		}
-		
-		/**
-		 * Whose turn is it
-		 * List of players do their turn
-		 * Have ordered List of players and after the player is done goes to the back
-		 * 
-		 *  Make gridEntity public and call it in here
-		 *  Loop through board
-		 *  
-		 *  robot separate from board or give everything co-ords giving positions
-		 *  loop thru all entities 
-		 *  
-		 *  have 2 lists one for robots and one for everything else
-		 *  2d array of all the extras 
-		 *  another 2d array of robots
-		 *  
-		 *  Send outcome to consle that robot has flag
-		 *  
-		 *  ---------------------------------------------------------------------------------------------
-		 *  
-		 *  create 2d array of entity and then have all the extras on the board - The Board (Grid)
-		 *  in here have list of robots (list of players) - set of co-oridnates x and y
-		 *  print method (grid class) - loop thru 2d array before printing each entity check if it has robot 
-		 *  if it does then print robot
-		 *  
-		 *  tic()
-		 *  whose turn it is
-		 *  update co-ords depending on whose turn it is 
-		 *  if co-ords same the push the other robot away
-		 *  then loop through the 2d array of entities
-		 *  tell them to act - activation stuff
-		 * 
-		 */
 	}	
 }
