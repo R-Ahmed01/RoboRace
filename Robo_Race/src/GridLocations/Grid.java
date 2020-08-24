@@ -15,8 +15,8 @@ import Main.EntityFactory;
 
 public class Grid {
 
-	public int height;
-	public int width;
+	public static int height;
+	public static int width;
 	public IGridEntity[][] entities;
 	
 	public Grid (File file) throws FileNotFoundException, IOException {
