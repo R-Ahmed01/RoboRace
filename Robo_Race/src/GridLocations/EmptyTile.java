@@ -1,17 +1,28 @@
 package GridLocations;
-
+/**
+ * The EmptyTile Class
+ * 
+ * @author Team 13: Daniel, Hayley, Rifath
+ * 
+ * Handles the Empty Tile Entities that are represented 
+ * by "." on the board.
+ */
 public class EmptyTile implements IGridEntity{
 
+	/**
+	 * Override the act method from the interface
+	 * @param robot
+	 */
 	@Override
 	public void act(Robot robot) {
-		// TODO Auto-generated method stub
 		/**
-		 * Represented as (.)
-		 * If robot location is empty tile do nothing
+		 * If the robot location is empty tile do nothing
 		 */
-		
 	}
 	
+	/**
+	 * Returns a string of "."
+	 */
 	public String toString() {
 		return ".";
 	}

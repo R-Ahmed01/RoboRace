@@ -1,7 +1,14 @@
 package GridLocations;
-
 import java.util.*;
-
+/**
+ * The Robot Class
+ * 
+ * @author Team 13: Daniel, Hayley, Rifath
+ * 
+ * Handles the Pit Grid Entities that are represented 
+ * by "A, B, C, D" on the board. If robot location is robot, then 
+ * the robot in the location it is moving to is pushed
+ */
 public class Robot implements IGridEntity{
 	private LinkedList<Character> actions; 
 	public int x;
@@ -12,16 +19,29 @@ public class Robot implements IGridEntity{
 	public int startingY;
 	public char robot;
 	
+	/**
+	 * The Robot Constructor
+	 * @param player
+	 */
 	public Robot (char player) {
 		robot = player;
 		direction = 'N';
 		actions = new LinkedList<Character>();
 	}
 	
+	/**
+	 * Converts a Character to a string
+	 */
 	public String toString() {
 		return Character.toString(robot);
 	}
 
+	/**
+	 * Override the act method from the interface
+	 * @param robot
+	 * If there isn't a robot at this position, do
+	 * nothing, else push robot in direction
+	 */
 	@Override
 	public void act(Robot robot) {
 		if(robot == null) {
@@ -43,14 +63,26 @@ public class Robot implements IGridEntity{
 		}
 	}
 	
+	/**
+	 * List of stored actions
+	 * @param actions
+	 */
 	public void storedActions(LinkedList<Character> actions) {
 		this.actions = actions;
 	}
 	
+	/**
+	 * Check for actions
+	 * @return boolean
+	 */
 	public boolean hasActions() {
 		return actions.size()>0;
 	}
 	
+	/**
+	 * Actions for a robot turn
+	 * @param robots
+	 */
 	public void turn(LinkedList<Robot> robots){
 		
 		if(actions.size() < 1) {
@@ -80,13 +112,20 @@ public class Robot implements IGridEntity{
 		checkOffGrid(robots);
 	}
 	
+	/**
+	 * Check robot hasn't moved off the board
+	 * @param robots
+	 */
 	public void checkOffGrid(LinkedList<Robot> robots) {
         if (x > Grid.width || y > Grid.height || x < 0 || y < 0) {
-            x = startingX; //Check if another robot is there
+            x = startingX;
             y = startingY;
         }
     }
 	
+	/**
+	 * Move Forward Function
+	 */
 	public void moveForward() {
 		switch(direction) {
 		case 'N':
@@ -104,6 +143,9 @@ public class Robot implements IGridEntity{
 		}
 	}
 	
+	/**
+	 * Move Backward Function
+	 */
 	public void moveBackwards() {
 		switch(direction) {
 		case 'N':
@@ -121,6 +163,9 @@ public class Robot implements IGridEntity{
 		}
 	}
 
+	/**
+	 * Rotate Left Function
+	 */
 	public void rotateLeft() {
 		switch(direction) {
 		case 'N':
@@ -138,6 +183,9 @@ public class Robot implements IGridEntity{
 		}
 	}
 
+	/**
+	 * Rotate Right Function
+	 */
 	public void rotateRight() {
 		switch(direction) {
 		case 'N':
@@ -155,6 +203,9 @@ public class Robot implements IGridEntity{
 		}
 	}
 	
+	/**
+	 * U Turn Function
+	 */
 	private void Uturn() {
 		switch(direction) {
 		case 'N':
