@@ -24,16 +24,9 @@ public class Robot implements IGridEntity{
 
 	@Override
 	public void act(Robot robot) {
-		// TODO Auto-generated method stub
-		/**
-		 * Represented as A, B, C, D
-		 * If robot location is another robot then 
-		 * moving robot pushes other robot in direction its going
-		 */
-		if(robot == null) {//if there isnt a robot at this position do nothing
+		if(robot == null) {
 			return;
 		}
-		//need to know your direction and change x & y
 		switch(direction) {
 		case 'N':
 		 	robot.y--;
@@ -85,22 +78,6 @@ public class Robot implements IGridEntity{
 				break;
 		}
 		checkOffGrid(robots);
-
-        //Checks if another robot is in its place and need to move it
-        for(int i = 0; i < robots.size(); i++) {
-
-            var otherRobot = robots.get(i);
-
-            if (otherRobot == this) {
-                continue;
-            }
-            if(x == otherRobot.x && y == otherRobot.y) {
-                // push other robot 
-                // create switch statement to do the pushing
-                otherRobot.checkOffGrid(robots);
-
-            }
-        }
 	}
 	
 	public void checkOffGrid(LinkedList<Robot> robots) {
@@ -125,8 +102,6 @@ public class Robot implements IGridEntity{
 				x--;
 			break;
 		}
-		//if x is greater than width or y id greater than height or either less than 0, return to start 
-		//if(x>)
 	}
 	
 	public void moveBackwards() {
