@@ -5,7 +5,7 @@ import java.util.*;
  * 
  * @author Team 13: Daniel, Hayley, Rifath
  * 
- * Handles the Pit Grid Entities that are represented 
+ * Handles the Robot Grid Entities that are represented 
  * by "A, B, C, D" on the board. If robot location is robot, then 
  * the robot in the location it is moving to is pushed
  */
